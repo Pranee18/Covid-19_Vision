@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Covi-Sift</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            color: #ffffffe9;
+        }
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.658);
+            padding: 20px;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+        .navbar .brand {
+            font-size: 2.5em;
+            font-weight: bold;
+        }
+        .navbar a {
+            margin-left: 20px;
+            padding: 12px 20px;
+            color: rgba(255, 255, 255, 0.93);
+            text-decoration: none;
+            font-size: 2.2em;
+            border: 2px solid transparent;
+            transition: background-color 0.3s, border-color 0.3s;
+        }
+        .navbar a:hover {
+            color: rgba(255, 120, 2, 0.634);
+        }
+        .content {
+            padding: 150px 20px 20px; /* top padding to account for the navbar */
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            height: 100vh; /* Full viewport height */
+        }
+        .hero {
+            background-image:url('https://www.cdc.gov/coronavirus/2019-ncov/images/COVID-19-SM-1200px.jpg'); 
+            background-size:cover;
+            background-position: center;
+        }
+        h1 {
+            font-size: 3.5em;
+        }
+        h1::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: orange;
+            margin: 10px auto;
+        }
+        p {
+            font-size: 1.5em;
+            max-width: 600px;
+            margin: 0 auto 10px;
+        }
+        .btn {
+            padding: 20px 30px;
+            font-size: 1.2em;
+            font-weight: 900;
+            border-radius: 40px;
+            background-color: darkorange;
+            color: white;
+            text-decoration: none;
+            border:none;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .btn:hover {
+            background-color: orange;
+        }
+        .footer {
+            background-color: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            text-align: center;
+            position:static;
+        }
+        #about {
+            color:black;
+            padding: 100px 20px;
+            text-align: center;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            background-image:url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSshnV4NbE-LDhsXxHVyuIWrB8_Dk153ELTRQ&s');
+            background-size:cover;
+            opacity: 86%;
+        }
+        #about h2 {
+            font-size: 3.5em;
+            margin-bottom: 10px;    
+            color: white;
+        }
+        #about h2::after {
+            content: "";
+            display: block;
+            width: 60px;
+            height: 4px;
+            background-color: white;
+            margin: 10px auto;
+        }
+        #about p {
+            font-size: 1.5em;
+            max-width: 600px;
+            margin: 0 auto 10px;
+            color: white;
+        }
+        #about .btn {
+            background-color: white;
+            color: black;
+        }
+        #about .btn:hover {
+            background-color: lightgray;
+        }
+        #precautions {
+            background-image:url('https://my.clevelandclinic.org/-/scassets/images/org/health/articles/21214-coronavirus-covid-19');
+            background-size:cover;
+            color: white;
+            padding: 100px 20px;
+            text-align: center;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #vaccinations {
+            background-image: url('https://images.livemint.com/img/2021/01/17/1600x900/2021-01-17T133023Z_330167589_RC2P9L99M2M6_RTRMADP_3_HEALTH-CORONAVIRUS-BRITAIN-VALNEVA_1610898821350_1610898836348.JPG');
+            background-size:cover;
+            color:black;
+            font-weight:bold;
+            padding: 100px 20px;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        .grid-container {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        .grid-item {
+            background-color: rgba(0, 0, 0, 0.1);
+            margin: 10px;
+            flex: 1 0 30%; /* Adjust the item to take up 30% of the row */
+            max-width: 30%;
+            padding: 20px;
+            box-sizing: border-box;
+            text-align: center;
+        }
+        .grid-item img {
+            max-width: 100%;
+            height: auto;
+            max-height: 150px; /* Adjust the max-height to make the images smaller */
+        }
+        #test {
+            background-color: pink;
+            color: black;
+            padding: 100px 20px;
+            text-align: center;
+            height: 100vh; /* Full viewport height */
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+        #result {
+            margin-top: 20px;
+            font-size: 1.5em;
+            font-weight: bold;
+            padding: 20px;
+            border-radius: 10px;
+        }
+        .result-covid {
+            background-color: red;
+            color: white;
+        }
+        .result-normal {
+            background-color: green;
+            color: white;
+        }
+        .result-viral-pneumonia {
+            background-color: orange;
+            color: white;
+        }
+        .result-lung-opacity {
+            background-color: blue;
+            color: white;
+        }
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .navbar a {
+                margin-left: 0;
+                margin-bottom: 10px;
+            }
+            .navbar .brand {
+                margin-bottom: 10px;
+            }
+            h1 {
+                font-size: 2.5em;
+            }
+            p {
+                font-size: 1.2em;
+            }
+            .grid-item {
+                flex: 1 0 100%; /* Make items full width on small screens */
+                max-width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <div class="brand"  style="padding-left: 50px;">Covi-Sift</div>
+        <div>
+            <a href="#about" style="padding-right: 0px;">About</a>
+            <a href="#precautions" style="padding-right: 0px;">Precautions</a>
+            <a href="#vaccinations" style="padding-right: 0px;">Vaccinations</a>
+            <a href="#test" style="padding-right: 70px;">Test</a>
+        </div>
+    </div>
+
+    <div class="content hero">  
+        <h2 style="font-size: 55px; margin: 0; margin-top: 5px; margin-bottom: 10px;">Smart Assistant for Covid</h2>
+        <h1 style="margin: 0;">Protection</h1>
+        <br><br><br>
+        <p>Be SAFE from coronavirus infection</p> <br><br><br>
+        <p>Be SMART & inform yourself about it</p><br><br><br>
+        <p>Be KIND & support one another</p><br><br><br>
+        <a href="#about" class="btn">Learn More</a>
+    </div>
+
+    <div id="about">
+        <h2>About</h2>
+        <p>Smart Assistant for Covid Protection is a comprehensive platform designed to provide accurate and up-to-date information on Covid-19. Our goal is to help individuals stay safe, make informed decisions, and support each other during this challenging time.</p>
+    </div>
+
+    <div id="precautions">
+        <h2>Precautions</h2>
+        <p>Learn about the precautions you can take to protect yourself and others from Covid-19.</p>
+        <div class="grid-container">
+            <div class="grid-item">
+                <img src="https://cdn.pfizer.com/pfizercom/styles/convert_to_webp/s3/GettyImages-476804983.jpg.webp?VersionId=QautRw.hryEsRvVh8WtSLwkw7R6mx4kw&itok=XSCo04Mz" alt="Wash Hands">
+                <p>Wash Hands</p>
+            </div>
+            <div class="grid-item">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRfSG3IYDOq7pQMT24p8_E_EOYTl-Rq5WhbeA&s" alt="Wear Mask">
+                <p>Wear Mask</p>
+            </div>
+            <div class="grid-item">
+                <img src="https://img.etimg.com/thumb/msid-74787175,width-640,height-480,imgsize-59204,resizemode-4/social-distancing.jpg" alt="Social Distance">
+                <p>Social Distance</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="vaccinations">
+        <h2>Vaccinations</h2>
+        <p>Get the latest information on Covid-19 vaccinations, including eligibility, availability, and more.</p>
+    </div>
+
+    <div id="test">
+        <h2>Test</h2>
+        <p>Use our AI-based tool to analyze your X-ray images and determine if you might be affected by Covid-19.</p>
+        <form action="/predict" method="post" enctype="multipart/form-data">
+            <input type="file" name="file" accept="image/*" required>
+            <br><br>
+            <button type="submit" class="btn">Upload and Analyze</button>
+        </form>
+        <p id="result"></p>
+    </div>
+
+    <div class="footer">
+        &copy; 2024 Covi-Sift. All rights reserved.
+    </div>
+</body>
+</html>
+
+
+
